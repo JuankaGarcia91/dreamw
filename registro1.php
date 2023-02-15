@@ -61,73 +61,15 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
   }
   header(sprintf("Location: %s", $insertGoTo));
 }
-
-$colname_registrar = "-1";
-if (isset($_GET['cedula'])) {
-  $colname_registrar = $_GET['cedula'];
-}
-mysql_select_db($database_prueba, $prueba);
-$query_registrar = sprintf("SELECT * FROM persona WHERE cedula = %s", GetSQLValueString($colname_registrar, "int"));
-$registrar = mysql_query($query_registrar, $prueba) or die(mysql_error());
-$row_registrar = mysql_fetch_assoc($registrar);
-$totalRows_registrar = mysql_num_rows($registrar);
 ?>
 <!doctype html>
 <html>
 <head>
 <meta charset="utf-8">
 <title>Documento sin título</title>
-<style>
-
-body {
-    font-family: 'Overpass', sans-serif;
-    font-weight: normal;
-    font-size: 100%;
-    color: #1b262c;   
-    margin: 0;
-    background-color: #53a83e;
-}
-
-#regis {
-    font-size: 250%;
-    color:#ffffff;
-    text-align: center;
-	margin-top:50px;    
-}
-
-#inregis {
-    font-family: 'Overpass', sans-serif;
-    font-size: 120%;
-    font-style: normal;
-    color:#ffffff;
-    text-decoration: none;
-    width: 90%;    
-    border: none;
-    padding: 5px;
-	text-align:center;
-    
-    border-radius: 3px 3px 3px 3px;
-    -moz-border-radius: 3px 3px 3px 3px;
-    -webkit-border-radius: 3px 3px 3px 3px;
-    
-    background-color: #7c0000;
-    
-    margin: 10px;
-	margin-right: 20px
-    
-}
-#inregis:hover {
-    background-color: #9fff51;
-    color:#000000;
-}
-
-</style>
 </head>
 
 <body>
-
-<h1 id="regis">Registro</h1>
-
 <form method="post" name="form1" action="<?php echo $editFormAction; ?>">
   <table align="center">
     <tr valign="baseline">
@@ -136,7 +78,7 @@ body {
     </tr>
     <tr valign="baseline">
       <td nowrap align="right">Fecha:</td>
-      <td><input type="date" name="fecha" value="" size="32"></td>
+      <td><input type="text" name="fecha" value="" size="32"></td>
     </tr>
     <tr valign="baseline">
       <td nowrap align="right">Asunto:</td>
@@ -180,13 +122,11 @@ body {
     </tr>
     <tr valign="baseline">
       <td nowrap align="right">&nbsp;</td>
-      <td><input id="inregis" type="submit" value="Insertar registro"></td>
+      <td><input type="submit" value="Insertar registro"></td>
     </tr>
   </table>
   <input type="hidden" name="MM_insert" value="form1">
 </form>
+<p>&nbsp;</p>
 </body>
 </html>
-<?php
-mysql_free_result($registrar);
-?>

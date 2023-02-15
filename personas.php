@@ -86,6 +86,32 @@ body {
     background-color: #53a83e;
 }
 
+#registro {
+    font-family: 'Overpass', sans-serif;
+    font-size: 120%;
+    font-style: normal;
+    color:#ffffff;
+    text-decoration: none;
+    width: 5%;
+    height: 20px;
+    border: none;
+    padding: 5px;
+    
+    border-radius: 3px 3px 3px 3px;
+    -moz-border-radius: 3px 3px 3px 3px;
+    -webkit-border-radius: 3px 3px 3px 3px;
+    
+    background-color: #7c0000;
+    
+    margin-top: 10px;
+    margin-left: 40rem;
+    
+}
+#registro:hover {
+    background-color: #9fff51;
+    color:#000000;
+}
+
 .titulo1 {
     font-size: 250%;
     color:#ffffff;
@@ -184,17 +210,46 @@ body {
     background-color: #9fff51;
     color:#000000;
 }
+
+#volver {
+    font-family: 'Overpass', sans-serif;
+    font-size: 120%;
+    font-style: normal;
+    color:#ffffff;
+    text-decoration: none;
+    width: 10%;
+    height: 40px;
+    border: none;
+    padding: 10px;
+    
+    border-radius: 3px 3px 3px 3px;
+    -moz-border-radius: 3px 3px 3px 3px;
+    -webkit-border-radius: 3px 3px 3px 3px;
+    
+    background-color: #7c0000;    
+    
+    margin-left: 21rem;
+    
+}
+#volver:hover {
+    background-color: #9fff51;
+    color:#000000;
+}
 </style>
 </head>
+
+
 
 <body>
 <div class="titulo1">
 Nuestros Clientes
 </div>
 
-<a href="registro.php">Registro</a>
-<br>
-<br>
+<div id="regis" align="center">
+	<a id="registro" href="registro.php">Registro</a>
+	<br>
+	<br>
+</div>
 
 <div id="contenedor">
 <table id="table2" border="1">
@@ -248,6 +303,10 @@ Nuestros Clientes
       </tr>
   </table>
 </div>
+<br>
+<br>
+<br>
+<a id="volver" name="volver" type="submit" value="volver" href="privado.php">Volver</a>
 </body>
 </html>
 <?php

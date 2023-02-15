@@ -31,7 +31,7 @@ if ((isset($_GET['doLogout'])) &&($_GET['doLogout']=="true")){
 if (!isset($_SESSION)) {
   session_start();
 }
-$MM_authorizedUsers = "admin";
+$MM_authorizedUsers = "consul,admin";
 $MM_donotCheckaccess = "false";
 
 // *** Restrict Access To Page: Grant or deny access to this page
