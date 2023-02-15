@@ -31,6 +31,8 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 }
 }
 
+$currentPage = $_SERVER["PHP_SELF"];
+
 $maxRows_personas = 10;
 $pageNum_personas = 0;
 if (isset($_GET['pageNum_personas'])) {
@@ -51,6 +53,22 @@ if (isset($_GET['totalRows_personas'])) {
   $totalRows_personas = mysql_num_rows($all_personas);
 }
 $totalPages_personas = ceil($totalRows_personas/$maxRows_personas)-1;
+
+$queryString_personas = "";
+if (!empty($_SERVER['QUERY_STRING'])) {
+  $params = explode("&", $_SERVER['QUERY_STRING']);
+  $newParams = array();
+  foreach ($params as $param) {
+    if (stristr($param, "pageNum_personas") == false && 
+        stristr($param, "totalRows_personas") == false) {
+      array_push($newParams, $param);
+    }
+  }
+  if (count($newParams) != 0) {
+    $queryString_personas = "&" . htmlentities(implode("&", $newParams));
+  }
+}
+$queryString_personas = sprintf("&totalRows_personas=%d%s", $totalRows_personas, $queryString_personas);
 ?>
 <!doctype html>
 <html>
@@ -110,6 +128,62 @@ body {
 	text-decoration:none;
 	color: #7a0000;
 }
+
+.caja2 {
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 1rem;
+}
+
+.anterior {
+    font-family: 'Overpass', sans-serif;
+    font-size: 120%;
+    font-style: normal;
+    color:#ffffff;
+    text-decoration: none;
+    width: 5%;
+    height: 20px;
+    border: none;
+    padding: 5px;
+    
+    border-radius: 3px 3px 3px 3px;
+    -moz-border-radius: 3px 3px 3px 3px;
+    -webkit-border-radius: 3px 3px 3px 3px;
+    
+    background-color: #7c0000;
+    
+    margin-top: 10px;
+    
+}
+.anterior:hover {
+    background-color: #9fff51;
+    color:#000000;
+}
+
+.siguiente {
+    font-family: 'Overpass', sans-serif;
+    font-size: 120%;
+    font-style: normal;
+    color:#ffffff;
+    text-decoration: none;
+    width: 5%;
+    height: 20px;
+    border: none;
+    padding: 5px;
+    
+    border-radius: 3px 3px 3px 3px;
+    -moz-border-radius: 3px 3px 3px 3px;
+    -webkit-border-radius: 3px 3px 3px 3px;
+    
+    background-color: #7c0000;
+    
+    margin-top: 10px;
+    margin-left: 21rem;
+    
+}
+.siguiente:hover {
+    background-color: #9fff51;
+    color:#000000;
+}
 </style>
 </head>
 
@@ -117,6 +191,11 @@ body {
 <div class="titulo1">
 Nuestros Clientes
 </div>
+
+<a href="registro.php">Registro</a>
+<br>
+<br>
+
 <div id="contenedor">
 <table id="table2" border="1">
   <tr class="barra1">
@@ -150,10 +229,24 @@ Nuestros Clientes
       <td><?php echo $row_personas['barrio']; ?></td>
       <td><?php echo $row_personas['descripcion']; ?></td>
       <td><a id="modif" href="modificar.php?cedula=<?php echo $row_personas['cedula']; ?>">Modificar</a></td>
-      <td><a id="elim" href="eliminar.php?cedula=<?php echo $row_personas['cedula']; ?>">Eliminar</a></td>
+      <td><a id="elim" onClick="return confirmarel()" href="eliminar.php?cedula=<?php echo $row_personas['cedula']; ?>">Eliminar</a></td>
     </tr>
     <?php } while ($row_personas = mysql_fetch_assoc($personas)); ?>
 </table>
+</div>
+
+<div class="paginacion" align="center">
+  <table class="pagina" width="60%" border="0px">
+    <tr>
+      <td class="caja1" width="30%"><?php if ($pageNum_personas > 0) { // Show if not first page ?>
+          <a class="anterior" href="<?php printf("%s?pageNum_personas=%d%s", $currentPage, max(0, $pageNum_personas - 1), $queryString_personas); ?>">Anterior</a>
+          <?php } // Show if not first page ?></td>
+      <td class="caja2" style="text-align:center"> Registros <?php echo ($startRow_personas + 1) ?> a <?php echo min($startRow_personas + $maxRows_personas, $totalRows_personas) ?> de <?php echo $totalRows_personas ?></td>
+      <td class="caja3" width="30%"><?php if ($pageNum_personas < $totalPages_personas) { // Show if not last page ?>
+  <a class="siguiente" href="<?php printf("%s?pageNum_personas=%d%s", $currentPage, min($totalPages_personas, $pageNum_personas + 1), $queryString_personas); ?>">siguiente</a>
+  <?php } // Show if not last page ?></td>
+      </tr>
+  </table>
 </div>
 </body>
 </html>
