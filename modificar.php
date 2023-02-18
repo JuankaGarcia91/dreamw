@@ -150,6 +150,20 @@ body {
 </style>
 </head>
 
+<script type="text/javascript">
+function confirmaractu(){
+	var respuesta = confirm("Estas seguro que deseas actualizar el usuario");
+	
+	if (respuesta == true){
+		return true;}
+		else{
+			return false;}
+}
+
+
+
+</script>
+
 <body>
 <div id="titulo">
   <div class="titulo">
@@ -208,7 +222,7 @@ body {
       <td id="barra3"><input type="text" name="descripcion" value="<?php echo htmlentities($row_clientes['descripcion'], ENT_COMPAT, 'utf-8'); ?>" size="32"></td>
     </tr>
     <tr valign="baseline">
-      <td colspan="2" align="right" nowrap><input id="botonact" type="submit" value="Actualizar registro"></td>
+      <td colspan="2" align="right" nowrap><input id="botonact" type="submit" value="Actualizar registro" onClick="return confirmaractu()"></td>
     </tr>
   </table>
   <input type="hidden" name="MM_update" value="form1">

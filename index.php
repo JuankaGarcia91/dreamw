@@ -72,6 +72,9 @@ if (isset($_POST['usuario'])) {
   }
   else {
     header("Location: ". $MM_redirectLoginFailed );
+	echo'<script>
+    alert("Tarea Guardada");
+	</script>';
   }
 }
 ?>

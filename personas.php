@@ -238,7 +238,19 @@ body {
 </style>
 </head>
 
+<script type="text/javascript">
+function confirmarel(){
+	var respuesta = confirm("Estas seguro que deseas eliminar el usuario");
+	
+	if (respuesta == true){
+		return true;}
+		else{
+			return false;}
+}
 
+
+
+</script>
 
 <body>
 <div class="titulo1">
