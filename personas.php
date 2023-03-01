@@ -258,7 +258,7 @@ Nuestros Clientes
 </div>
 
 <div id="regis" align="center">
-	<a id="registro" href="registro.php">Registro</a>
+	<a id="registro" href="registro1.php">Registro</a>
 	<br>
 	<br>
 </div>
@@ -278,6 +278,9 @@ Nuestros Clientes
     <td>Direccion</td>
     <td>Barrio</td>
     <td>Descripcion</td>
+    <td>Pais</td>
+    <td>Estado</td>
+    <td>Ciudad</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
   </tr>
@@ -295,6 +298,9 @@ Nuestros Clientes
       <td><?php echo $row_personas['direccion']; ?></td>
       <td><?php echo $row_personas['barrio']; ?></td>
       <td><?php echo $row_personas['descripcion']; ?></td>
+      <td><?php echo $row_personas['pais']; ?></td>
+      <td><?php echo $row_personas['estado']; ?></td>
+      <td><?php echo $row_personas['ciudad']; ?></td>
       <td><a id="modif" href="modificar.php?cedula=<?php echo $row_personas['cedula']; ?>">Modificar</a></td>
       <td><a id="elim" onClick="return confirmarel()" href="eliminar.php?cedula=<?php echo $row_personas['cedula']; ?>">Eliminar</a></td>
     </tr>

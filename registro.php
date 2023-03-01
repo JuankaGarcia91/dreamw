@@ -182,8 +182,9 @@ body {
       <td nowrap align="right">&nbsp;</td>
       <td><input id="inregis" type="submit" value="Insertar registro"></td>
     </tr>
-  </table>
-  <input type="hidden" name="MM_insert" value="form1">
+  </table>    
+    <input type="hidden" name="MM_insert" value="form1">
+  </p>
 </form>
 </body>
 </html>
