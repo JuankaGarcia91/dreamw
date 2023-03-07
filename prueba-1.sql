@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-03-2023 a las 14:20:23
+-- Tiempo de generación: 01-03-2023 a las 17:38:15
 -- Versión del servidor: 10.1.21-MariaDB
 -- Versión de PHP: 5.6.30
 
@@ -27,36 +27,19 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `auditoria_persona` (
-  `cedula` int(15) NOT NULL,
-  `fecha` date DEFAULT NULL,
-  `asunto_anterior` varchar(100) DEFAULT NULL,
-  `asunto_nuevo` varchar(100) DEFAULT NULL,
   `primer_nombre_anterior` varchar(20) DEFAULT NULL,
   `primer_nombre_nuevo` varchar(20) DEFAULT NULL,
-  `segundo_nombre_anterior` varchar(20) DEFAULT NULL,
-  `segundo_nombre_nuevo` varchar(20) DEFAULT NULL,
-  `primer_apellido_anterior` varchar(20) DEFAULT NULL,
-  `primer_apellido_nuevo` varchar(20) DEFAULT NULL,
-  `segundo_apellido_anterior` varchar(20) DEFAULT NULL,
-  `segundo_apellido_nuevo` varchar(20) DEFAULT NULL,
-  `fijo_anterior` int(20) DEFAULT NULL,
-  `fijo_nuevo` int(20) DEFAULT NULL,
-  `celular_anterior` int(20) DEFAULT NULL,
-  `celular_nuevo` int(20) DEFAULT NULL,
-  `direccion_anterior` int(20) DEFAULT NULL,
-  `direccion_nuevo` int(20) DEFAULT NULL,
-  `barrio_anterior` int(20) DEFAULT NULL,
-  `barrio_nuevo` int(20) DEFAULT NULL,
-  `pais_anterior` int(20) DEFAULT NULL,
-  `pais_nuevo` int(20) DEFAULT NULL,
-  `estado_anterior` int(20) DEFAULT NULL,
-  `estado_nuevo` int(20) DEFAULT NULL,
-  `ciudad_anterior` int(20) DEFAULT NULL,
-  `ciudad_nuevo` int(20) DEFAULT NULL,
   `usuario` varchar(20) DEFAULT NULL,
   `modificado` datetime DEFAULT NULL,
-  `proceso` varchar(20) DEFAULT NULL
+  `proceso` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `auditoria_persona`
+--
+
+INSERT INTO `auditoria_persona` (`primer_nombre_anterior`, `primer_nombre_nuevo`, `usuario`, `modificado`, `proceso`) VALUES
+(NULL, 'ylyleylhj', 'root@localhost', '2023-03-01 11:36:18', 'Insertado');
 
 -- --------------------------------------------------------
 
@@ -3688,90 +3671,8 @@ INSERT INTO `persona` (`cedula`, `fecha`, `asunto`, `primer_nombre`, `segundo_no
 -- Disparadores `persona`
 --
 DELIMITER $$
-CREATE TRIGGER `Modifica_auditoria_persona` BEFORE UPDATE ON `persona` FOR EACH ROW INSERT INTO auditoria_persona(
-    primer_nombre_anterior,
-    primer_nombre_nuevo,
-    segundo_nombre_anterior,
-    segundo_nombre_nuevo,
-    primer_apellido_anterior,
-    primer_apellido_nuevo,
-    segundo_apellido_anterior,
-    segundo_apellido_nuevo,
-    fijo_anterior,
-    fijo_nuevo,
-    celular_anterior,
-    celular_nuevo,
-    direccion_anterior,
-    direccion_nuevo,
-    barrio_anterior,
-    barrio_nuevo,
-    pais_anterior,
-    pais_nuevo,
-    estado_anterior,
-    estado_nuevo,
-    ciudad_anterior,
-    ciudad_nuevo,
-    usuario,
-    modificado,
-    proceso)
-VALUES (
-    OLD.primer_nombre,
-    NEW.primer_nombre,
-    OLD.segundo_nombre,
-    NEW.segundo_nombre,
-    OLD.primer_apellido,
-    NEW.primer_apellido,
-    OLD.segundo_apellido,
-    NEW.segundo_apellido,
-    OLD.fijo,
-    NEW.fijo,
-    OLD.celular,
-    NEW.celular,
-    OLD.direccion,
-    NEW.direccion,
-    OLD.barrio,
-    NEW.barrio,
-    OLD.pais,
-    NEW.pais,
-    OLD.estado,
-    NEW.estado,
-    OLD.ciudad,
-    NEW.ciudad,    
-    CURRENT_USER(), 
-    NOW(), 
-    NEW.proceso)
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `insertar_auditoria_persona` AFTER INSERT ON `persona` FOR EACH ROW INSERT INTO auditoria_persona(
-    primer_nombre_nuevo,
-    segundo_nombre_nuevo,
-    primer_apellido_nuevo,
-    segundo_apellido_nuevo,
-    fijo_nuevo,
-    celular_nuevo,
-    direccion_nuevo,
-    barrio_nuevo,
-    pais_nuevo,
-    estado_nuevo,
-    ciudad_nuevo,
-    usuario, 
-    modificado, 
-    proceso)
-VALUES (NEW.primer_nombre, 
-        NEW.segundo_nombre,
-    	NEW.primer_apellido,
-    	NEW.segundo_apellido,
-    	NEW.fijo,
-    	NEW.celular,
-    	NEW.direccion,
-    	NEW.barrio,
-    	NEW.pais,
-    	NEW.estado,
-    	NEW.ciudad,
-    	CURRENT_USER(), 
-        NOW(), 
-        NEW.proceso)
+CREATE TRIGGER `trigger_auditoria_persona` AFTER INSERT ON `persona` FOR EACH ROW INSERT INTO auditoria_persona(primer_nombre_nuevo, usuario, modificado, proceso)
+VALUES (NEW.primer_nombre, CURRENT_USER(), NOW(), NEW.proceso)
 $$
 DELIMITER ;
 
@@ -5182,12 +5083,6 @@ INSERT INTO `province` (`Name`, `Country`, `Population`, `Area`, `Capital`, `Cap
 --
 -- Índices para tablas volcadas
 --
-
---
--- Indices de la tabla `auditoria_persona`
---
-ALTER TABLE `auditoria_persona`
-  ADD PRIMARY KEY (`cedula`);
 
 --
 -- Indices de la tabla `barrios`
