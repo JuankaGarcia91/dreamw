@@ -46,7 +46,7 @@ if (isset($_POST['usuario'])) {
   $loginUsername=$_POST['usuario'];
   $password=$_POST['contrasena'];
   $MM_fldUserAuthorization = "tipo";
-  $MM_redirectLoginSuccess = "privado.php";
+  $MM_redirectLoginSuccess = "menup.php";
   $MM_redirectLoginFailed = "error.php";
   $MM_redirecttoReferrer = false;
   mysql_select_db($database_prueba, $prueba);

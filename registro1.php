@@ -37,8 +37,8 @@ if (isset($_SERVER['QUERY_STRING'])) {
 }
 
 if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
-  $insertSQL = sprintf("INSERT INTO persona (cedula, fecha, asunto, primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, fijo, celular, direccion, barrio, descripcion, pais, estado, ciudad) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
-                       GetSQLValueString($_POST['cedula'], "int"),
+  $insertSQL = sprintf("INSERT INTO persona (cedula, fecha, asunto, primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, fijo, celular, direccion, barrio, descripcion, pais, estado, ciudad, proceso) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
+                       GetSQLValueString($_POST['cedula'], "text"),
                        GetSQLValueString($_POST['fecha'], "date"),
                        GetSQLValueString($_POST['asunto'], "text"),
                        GetSQLValueString($_POST['primer_nombre'], "text"),
@@ -52,7 +52,8 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
                        GetSQLValueString($_POST['descripcion'], "text"),
                        GetSQLValueString($_POST['pais'], "text"),
                        GetSQLValueString($_POST['estado'], "text"),
-                       GetSQLValueString($_POST['ciudad'], "text"));
+                       GetSQLValueString($_POST['ciudad'], "text"),
+					   GetSQLValueString($_POST['proceso'], "text"));
 
   mysql_select_db($database_prueba, $prueba);
   $Result1 = mysql_query($insertSQL, $prueba) or die(mysql_error());
@@ -192,7 +193,7 @@ body {
   <table align="center">
     <tr valign="baseline">
       <td nowrap align="right">Cedula:</td>
-      <td><input type="text" name="cedula" value="" size="32" required></td>
+      <td><input type="number" name="cedula" value="" size="32" required></td>
     </tr>
     <tr valign="baseline">
       <td nowrap align="right">Fecha:</td>
@@ -220,15 +221,19 @@ body {
     </tr>
     <tr valign="baseline">
       <td nowrap align="right">Fijo:</td>
-      <td><input type="text" name="fijo" value="" size="32"></td>
+      <td><input type="number" name="fijo" value="" size="32"></td>
     </tr>
     <tr valign="baseline">
       <td nowrap align="right">Celular:</td>
-      <td><input type="text" name="celular" value="" size="32"></td>
+      <td><input type="number" name="celular" value="" size="32"></td>
     </tr>
     <tr valign="baseline">
       <td nowrap align="right">Direccion:</td>
       <td><input type="text" name="direccion" value="" size="32"></td>
+    </tr>
+    <tr valign="baseline">
+      <td nowrap align="right">Proceso:</td>
+      <td><input type="text" name="proceso" value="" size="32"></td>
     </tr>
     <tr valign="baseline">
       <td nowrap align="right">Barrio:</td>
